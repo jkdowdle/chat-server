@@ -1,0 +1,23 @@
+type Channel {
+  id: ID!
+  participants: [User]
+  feed: [Message]
+}
+
+type Message {
+  id: ID!
+  text: String
+  from: User
+  channel: Channel
+}
+
+extend type Query {
+  mars: String
+  channels: [Channel]
+}
+
+
+extend type Mutation {
+  createChannel: Channel
+  addMessage(userId: ID!, channelId: ID!, text: String!): Message
+}

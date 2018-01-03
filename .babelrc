@@ -1,8 +1,12 @@
 {
-  presets: ['latest'],
-  plugins: [
-    'transform-runtime',
-    'transform-async-generator-functions',
-    'transform-object-rest-spread',
+  "plugins": [
+    "babel-plugin-inline-import"
   ],
+  "presets": [
+    "latest",
+    "stage-0",
+    "stage-1",
+    "stage-2",
+    "stage-3"
+  ]
 }
