@@ -1,5 +1,6 @@
 type Channel {
   id: ID!
+  name: String
   participants: [User]
   feed: [Message]
 }
@@ -12,12 +13,20 @@ type Message {
 }
 
 extend type Query {
-  mars: String
   channels: [Channel]
 }
 
-
 extend type Mutation {
-  createChannel: Channel
-  addMessage(userId: ID!, channelId: ID!, text: String!): Message
+  createChannel(input: ChannelInput): Channel
+  addMessage(input: MessageInput): Message
+}
+
+input MessageInput  {
+  userId: ID
+  channelId: ID
+  text: String
+}
+
+input ChannelInput {
+  name: String
 }

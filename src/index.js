@@ -3,6 +3,8 @@ import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import session from 'express-session'
 import bodyParser from 'body-parser'
 import fileStore from 'session-file-store'
+import bcrypt from 'bcrypt'
+import cors from 'cors'
 
 import { schema } from './api'
 import createApp from './create-app'
@@ -26,12 +28,15 @@ const appSession = session({
   store: new FileStore()
 })
 
+const appCors = cors({ credentials: true, origin: 'http://localhost:3000' })
+
 const middleware = [
-  appSession
+  appSession,
+  appCors
 ]
 
 const controllers = {
-  userController: createUserController({ connection, uuid }),
+  userController: createUserController({ connection, uuid, bcrypt }),
   chatController: createChatController({ connection, uuid })
 }
 

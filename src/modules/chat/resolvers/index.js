@@ -1,17 +1,15 @@
 export const resolvers = {
   Query: {
-    mars: () => 'pretty neat',
-
     channels: (_, args, { chatController: { getChannels }}) => {
       return getChannels()
     }
   },
   Mutation: {
-    createChannel: (_, args, { chatController: { createChannel }}) => {
-      return createChannel(args)
+    createChannel: (_, { input }, { chatController: { createChannel }}) => {
+      return createChannel(input)
     },
-    addMessage: (_, args, { chatController: { addMessage }}) => {
-      return addMessage(args)
+    addMessage: (_, { input }, { chatController: { addMessage }}) => {
+      return addMessage(input)
     }
   },
   Channel: {

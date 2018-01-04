@@ -16,6 +16,8 @@ const User = connection.schema
     table.uuid('id').notNullable().primary()
     table.string('email').notNullable().unique()
     table.string('password').notNullable()
+    table.string('first_name')
+    table.string('last_name')
     table.boolean('online').notNullable()
     table.timestamps(true, true)
   })
@@ -23,6 +25,7 @@ const User = connection.schema
 const Chat = connection.schema
   .createTableIfNotExists('channel', (table) => {
     table.uuid('id').notNullable().primary()
+    table.string('name')
     table.timestamps(true, true)
   })
   .createTableIfNotExists('channel_participant', (table) => {
@@ -80,9 +83,9 @@ Promise
   .then(() =>
     Promise.all([
       connection('user')
-        .insert({ id: userId, email: 'ead@gmail.com', password: '123456', online: true }),
+        .insert({ id: userId, email: 'ead@gmail.com', first_name: 'E', last_name: 'D', password: '123456', online: true }),
       connection('channel')
-        .insert({ id: channelId }),
+        .insert({ id: channelId, name: 'TestChannel' }),
       connection('channel_participant')
         .insert({ user_id: userId, channel_id: channelId }),
       connection('message')

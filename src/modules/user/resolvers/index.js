@@ -1,42 +1,29 @@
 export const resolvers = {
   Query: {
-    hello: (root, args, context) => {
-      return 'Hello world!'
-    },
     currentUser(_, args, { user }) {
       return user
     }
   },
 
   Mutation: {
-    async signin(_, args, { getSession, userController: { signin } }) {
-      const session = getSession()
-      const user = await signin(args)
+    async signin(_, { input }, { userController: { signin } }) {
+      const user = await signin(input)
 
-      if(!user) {
-        throw new Error('User does not exist or inccorect password')
-      }
-      
-      return new Promise((resolve, reject) => {
-        session.regenerate((error) => {
-          getSession().user = { id: user.id } 
-          resolve(user)
-        })
-      })
+      return user
     },
-    async signup(_, args, { getSession, userController: { signup } }) {
-      const session = getSession()
-      const user = await signup(args)
+    async signup(_, { input }, { userController: { signup } }) {
+      console.log('input', input)
+      const user = await signup(input)
 
-      return new Promise((resolve, reject) => {
-        session.regenerate((error) => {
-          getSession().user = { id: user.id } 
-          resolve(user)
-        })
-      })
+      return user
     },
-    signout(_, args, { getSession }) {
-      return new Promise(resolve => getSession().destroy(() => resolve(true)))
+    signout(_, args) {
+      return true 
+      // return new Promise(resolve => getSession().destroy(() => resolve(true)))
     }
+  },
+
+  User: {
+    name: ({ firstName, lastName }) => `${firstName} ${lastName}`
   }
 }

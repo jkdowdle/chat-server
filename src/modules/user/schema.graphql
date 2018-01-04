@@ -1,18 +1,23 @@
 type User {
   id: String
-#  token: String
   name: String
   email: String
 }
 
 extend type Query {
-  hello: String
   currentUser: User
   channels: [Channel]
 }
 
 extend type Mutation {
-  signin(email: String, password: String): User
-  signup(name: String, email: String, password: String): User
+  signin(input: UserInput): User
+  signup(input: UserInput): User
   signout: User
+}
+
+input UserInput {
+  email: String
+  password: String
+  firstName: String
+  lastName: String
 }

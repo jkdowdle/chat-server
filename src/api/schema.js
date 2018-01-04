@@ -13,6 +13,4 @@ const typeDefs = [rootSchema, ...moduleSchemas]
 
 const resolvers = merge(userRes, chatRes)
 
-// console.log('moduleSchemas', moduleSchemas)
-
 export const schema = makeExecutableSchema({ typeDefs, resolvers })
