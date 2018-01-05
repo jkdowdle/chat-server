@@ -4,15 +4,21 @@ type User {
   email: String
 }
 
+type AuthUser {
+  id: String
+  name: String
+  email: String
+}
+
 extend type Query {
-  currentUser: User
+  currentUser: AuthUser
   channels: [Channel]
 }
 
 extend type Mutation {
-  signin(input: UserInput): User
-  signup(input: UserInput): User
-  signout: User
+  signin(input: UserInput): AuthUser
+  signup(input: UserInput): AuthUser
+  signout: AuthUser
 }
 
 input UserInput {

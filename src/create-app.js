@@ -17,6 +17,8 @@ export const createApp = ({
   
   app.use('/graphql', bodyParser.json(), graphql( async (request, response) => {
 
+    console.log('hit here')
+
     const session = request.session 
 
     const user = await (session && session.user && controllers.userController.getCurrentUser({ sessionId: request.session.user.id })) || {}
