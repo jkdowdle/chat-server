@@ -21,7 +21,7 @@ const createGetChannelFeed = ({ connection }) => (channelId) => {
   return connection('message')
     .where('channel_id', channelId)
     .then((feed) => {
-      console.log('feed', feed)
+      // console.log('feed', feed)
       return feed || []})
 }
 
