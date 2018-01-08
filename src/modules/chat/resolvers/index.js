@@ -2,6 +2,9 @@ export const resolvers = {
   Query: {
     channels: (_, args, { chatController: { getChannels }}) => {
       return getChannels()
+    },
+    channel: (_, { input }, { chatController: { getChannel }}) => {
+      return getChannel(input)
     }
   },
   Mutation: {

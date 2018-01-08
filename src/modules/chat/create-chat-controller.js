@@ -3,6 +3,14 @@ const createGetChannels = ({ connection }) => () => {
     .then((channels) => channels)
 }
 
+const createGetChannel = ({ connection }) => ({ id }) => {
+  return connection('channel')
+    .where('id', id)
+    .then((res) => {
+      console.log('res', res)
+      return res[0]})
+}
+
 const createCreateChannel = ({ connection, uuid }) => (input) => {
   return connection('channel')
     .insert({ id: uuid(), ...input })
@@ -29,7 +37,8 @@ export const createChatController = ({ connection, uuid }) => ({
   getChannels: createGetChannels({ connection }),
   createChannel: createCreateChannel({ connection, uuid }),
   addMessage: createAddMessage({ connection, uuid }),
-  getChannelFeed: createGetChannelFeed({ connection })
+  getChannelFeed: createGetChannelFeed({ connection }),
+  getChannel: createGetChannel({ connection })
 })
 
 export default createChatController

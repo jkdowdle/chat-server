@@ -25,5 +25,9 @@ export const resolvers = {
 
   User: {
     name: ({ firstName, lastName }) => `${firstName} ${lastName}`
+  },
+
+  AuthUser: {
+    name: ({ firstName, lastName }) => `${firstName} ${lastName}`
   }
 }
