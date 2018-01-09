@@ -1,12 +1,12 @@
 type Channel {
-  id: ID!
+  id: ID
   name: String
   participants: [User]
   feed: [Message]
 }
 
 type Message {
-  id: ID!
+  id: ID
   text: String
   from: User
   channel: Channel

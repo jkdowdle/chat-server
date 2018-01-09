@@ -5,7 +5,9 @@ const createGetCurrentUser = ({ connection }) => ({ sessionId }) => {
     ? null
     : connection('user')
         .where('id', sessionId)
-        .then(([ { first_name: firstName, last_name: lastName, ...user } ]) => ({ ...user, firstName, lastName }))
+        .then(([ { first_name: firstName, last_name: lastName, ...user } ]) => {
+          console.log('getCurUser', { ...user, firstName, lastName })
+          return ({ ...user, firstName, lastName })})
         .catch((e) => console.log('e', e))
 }
 

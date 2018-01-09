@@ -15,7 +15,10 @@ const createCreateChannel = ({ connection, uuid }) => (input) => {
   return connection('channel')
     .insert({ id: uuid(), ...input })
     .returning(['id', 'name', 'created_at'])
-    .then(([ channel ]) => channel)
+    .then((channel) => {
+      console.log('channel to be returned', channel)
+      return channel
+    })
 }
 
 const createAddMessage = ({ connection, uuid }) => ({ userId, channelId, ...message }) => {

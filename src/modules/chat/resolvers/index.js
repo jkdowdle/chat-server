@@ -11,8 +11,8 @@ export const resolvers = {
     createChannel: (_, { input }, { chatController: { createChannel }}) => {
       return createChannel(input)
     },
-    addMessage: (_, { input }, { chatController: { addMessage }}) => {
-      return addMessage(input)
+    addMessage: (_, { input }, { user, chatController: { addMessage }}) => {
+      return addMessage({ ...input, userId: user.id })
     }
   },
   Channel: {
@@ -22,6 +22,8 @@ export const resolvers = {
   },
   Message: {
     from: ({ user_id }, args, { userController: { getUserById }}) => {
+      // getUserById(user_id)
+      //   .then(user => console.log('from res', user))
       return getUserById(user_id)
     }
   }

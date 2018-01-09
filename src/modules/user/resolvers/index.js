@@ -12,7 +12,6 @@ export const resolvers = {
       return user
     },
     async signup(_, { input }, { userController: { signup } }) {
-      console.log('input', input)
       const user = await signup(input)
 
       return user
@@ -28,6 +27,8 @@ export const resolvers = {
   },
 
   AuthUser: {
-    name: ({ firstName, lastName }) => `${firstName} ${lastName}`
+    name: (user) => {
+      // console.log('user', user)
+      return `${user.firstName} ${user.lastName}`}
   }
 }
